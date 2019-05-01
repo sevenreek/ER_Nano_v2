@@ -16,10 +16,10 @@ void BoardCoordinator::onUpdate()
 			switch (msg->command)
 			{
 				case CMD_TORCH_GLOW:
-					wireless->sendShort(SHRT_1, WirelessController::REPEAT_COUNT);
+					wireless->sendShort(TORCH_HIGH, WirelessController::REPEAT_COUNT);
 				break;
 				case CMD_TORCH_DIM:
-					wireless->sendShort(SHRT_2, WirelessController::REPEAT_COUNT);
+					wireless->sendShort(TORCH_LOW, WirelessController::REPEAT_COUNT);
 				break;
 				default: 
 					mega->sendMessage(msg);

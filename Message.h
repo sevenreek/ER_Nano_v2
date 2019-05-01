@@ -6,10 +6,10 @@ static const int COMMAND_LENGTH = 1;
 static const int POSTAMBLE_LENGTH = 2; // \n\0
 static const int TOTAL_LENGTH = PREAMBLE_LENGTH + COMMAND_LENGTH + ARGUMENT_LENGTH + POSTAMBLE_LENGTH;
 static const int MESSAGE_SHIFT = 0x30; // messages are shifted by hex 0x30 since 0 is \0 and 10 is new line etc.
-enum ShortMessage {
-	SHRT_NONE,
-	SHRT_1,
-	SHRT_2,
+enum TorchMessage {
+	TORCH_NOCMD,
+	TORCH_HIGH,
+	TORCH_LOW,
 };
 enum MessageType {
 	MTYPE_UNDEFINED,
