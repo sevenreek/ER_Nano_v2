@@ -33,14 +33,13 @@ CommunicationController * pc;
 CommunicationController * mega;
 WirelessController * torches;
 NeoICSerial * serial;
-RH_ASK * wireless;
 void setup()
 {
 	serial = new NeoICSerial();
 	pc = new CommunicationController(&Serial);
 	mega = new CommunicationController(serial);
 	torches = new WirelessController(RF_SPEED, RF_RX, RF_TX, RF_PTT, RF_PTT_INV);
-	coordinator = new BoardCoordinator(pc, mega, wireless);
+	coordinator = new BoardCoordinator(pc, mega, torches);
 
 }
 

@@ -8,6 +8,6 @@ private:
 	unsigned int pos;
 public:
 	CommunicationController(Stream * stream);
-	bool hasMessage(Message * msg);
+	bool hasMessage(Message *& msg);
 	void sendMessage(Message * msg);
 };

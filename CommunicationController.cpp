@@ -3,7 +3,7 @@ CommunicationController::CommunicationController(Stream * stream)
 {
 	this->stream = stream;
 }
-bool CommunicationController::hasMessage(Message * message)
+bool CommunicationController::hasMessage(Message *& message)
 {
 	while (stream->available())
 	{
@@ -27,6 +27,7 @@ bool CommunicationController::hasMessage(Message * message)
 }
 void CommunicationController::sendMessage(Message * message)
 {
-	stream->write(Message::toCharArray(message));
-	delete message;
+	uint8_t* mes = Message::toByteArray(message);
+	stream->write((char*)mes);
+	delete[] mes;
 }
