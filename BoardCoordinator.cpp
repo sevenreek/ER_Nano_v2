@@ -13,18 +13,23 @@ void BoardCoordinator::onUpdate()
 	{
 		if (msg->sender == SNDR_PC)
 		{
-			switch (msg->command)
+			if (msg->type == MTYPE_EVENT)
 			{
+				switch (msg->command)
+				{
 				case CMD_TORCH_GLOW:
 					wireless->sendShort(TORCH_HIGH, WirelessController::REPEAT_COUNT);
-				break;
+					break;
 				case CMD_TORCH_DIM:
 					wireless->sendShort(TORCH_LOW, WirelessController::REPEAT_COUNT);
-				break;
-				default: 
+					break;
+				default:
 					mega->sendMessage(msg);
-				break;
+					break;
+				}
 			}
+			else
+				mega->sendMessage(msg);
 		}
 		delete msg;
 		msg = 0;
