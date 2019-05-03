@@ -7,8 +7,8 @@ WirelessController::WirelessController(int speed, int rx, int tx, int ptt, bool 
 }
 void WirelessController::sendMessage(Message *m, int repeatCount)
 {
-	char * mes = Message::toCharArray(m);
-	int len = strlen(mes);
+	uint8_t * mes = Message::toByteArray(m);
+	int len = TOTAL_LENGTH;
 	while (repeatCount--)
 	{
 		driver->send((uint8_t*)mes,len);
