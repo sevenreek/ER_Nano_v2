@@ -31,6 +31,11 @@ void BoardCoordinator::onUpdate()
 	}
 	if (mega->hasMessage(msg))
 	{
+		//Serial.print("Recieved pointer: "); Serial.println((int)msg);
+		//Serial.println("Message recieved:");
+		//Serial.println(msg->sender);
+		//Serial.println(msg->type);
+		//Serial.println(msg->command);
 		pc->sendMessage(msg);
 		delete msg;
 		msg = 0;

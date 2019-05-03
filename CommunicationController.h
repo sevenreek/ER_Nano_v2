@@ -4,7 +4,7 @@
 class CommunicationController {
 private:
 	Stream * stream;
-	char messageArray[TOTAL_LENGTH];
+	uint8_t messageArray[TOTAL_LENGTH];
 	unsigned int pos;
 public:
 	CommunicationController(Stream * stream);

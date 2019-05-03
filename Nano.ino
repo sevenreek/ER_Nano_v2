@@ -35,7 +35,9 @@ WirelessController * torches;
 NeoICSerial * serial;
 void setup()
 {
+	Serial.begin(9600);
 	serial = new NeoICSerial();
+	serial->begin(9600);
 	pc = new CommunicationController(&Serial);
 	mega = new CommunicationController(serial);
 	torches = new WirelessController(RF_SPEED, RF_RX, RF_TX, RF_PTT, RF_PTT_INV);
@@ -46,5 +48,6 @@ void setup()
 // Add the main program code into the continuous loop() function
 void loop()
 {
+	//Serial.println("Update");
 	coordinator->onUpdate();
 }
