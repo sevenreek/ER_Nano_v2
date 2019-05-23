@@ -37,11 +37,15 @@ enum EventCommands {
 	CMD_TORCH_DIM,
 	CMD_SPELL_CAST_BEGIN, // add args here
 	CMD_SPELL_CAST_CORRECTLY,
+	CMD_TORCH_OFF_TEMP,
+	CMD_TORCH_OFF,
 };
 enum TorchMessage {
 	TORCH_NOCMD,
 	TORCH_HIGH,
 	TORCH_LOW,
+	TORCH_OFF_TEMP,
+	TORCH_OFF,
 };
 class Message {
 private:

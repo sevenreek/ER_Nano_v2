@@ -5,7 +5,7 @@ BoardCoordinator::BoardCoordinator(CommunicationController * pc, CommunicationCo
 	this->mega = mega;
 	this->wireless = wireless;
 }
-
+const unsigned int TORCH_OFF_TEMP_DELAY_TIME = 3000; // time after which to turn the torches back on after TEMP_OFF
 void BoardCoordinator::onUpdate()
 {
 	Message * msg = 0;
@@ -22,6 +22,14 @@ void BoardCoordinator::onUpdate()
 					break;
 				case CMD_TORCH_DIM:
 					wireless->sendShort(TORCH_LOW, WirelessController::REPEAT_COUNT);
+					break;
+				case CMD_TORCH_OFF_TEMP:
+					wireless->sendShort(TORCH_OFF_TEMP, WirelessController::REPEAT_COUNT);
+					delay(TORCH_OFF_TEMP_DELAY_TIME);
+					wireless->sendShort(TORCH_LOW, WirelessController::REPEAT_COUNT);
+					break;
+				case CMD_TORCH_OFF:
+					wireless->sendShort(TORCH_OFF, WirelessController::REPEAT_COUNT);
 					break;
 				default:
 					mega->sendMessage(msg);
