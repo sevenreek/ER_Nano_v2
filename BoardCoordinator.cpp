@@ -5,7 +5,9 @@ BoardCoordinator::BoardCoordinator(CommunicationController * pc, CommunicationCo
 	this->mega = mega;
 	this->wireless = wireless;
 }
-const unsigned int TORCH_OFF_TEMP_DELAY_TIME = 3000; // time after which to turn the torches back on after TEMP_OFF
+const unsigned int TORCH_OFF_TEMP_DELAY_TIME = 4000; // time after which to turn the torches back on after TEMP_OFF not exactly ms
+			// because the message is sent a lot of times to make sure it reaches the torches some minimal delay at the beginning exists
+			// and equals the time it takes the transmitter to send the message the given amount of time.
 void BoardCoordinator::onUpdate()
 {
 	Message * msg = 0;
