@@ -42,7 +42,7 @@ uint8_t* Message::toByteArray(Message * message)
 
 	arr[2] = (uint8_t)message->command + MESSAGE_SHIFT;
 
-	message->argument %= 9999;
+	message->argument %= 10000;
 	snprintf((char*)(arr + PREAMBLE_LENGTH + COMMAND_LENGTH), ARGUMENT_LENGTH, "%d", message->argument);
 	arr[TOTAL_LENGTH - 1] = '\n';
 

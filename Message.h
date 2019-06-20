@@ -30,6 +30,7 @@ enum StateCommands {
 	CMD_HANGMAN_DOWN,
 	CMD_BOOK_TAKEN,
 	CMD_RESTORE_ROOM,
+	CMD_ZERO_STATE,
 };
 enum EventCommands {
 	CMD_NOEVENT,
@@ -37,11 +38,20 @@ enum EventCommands {
 	CMD_TORCH_DIM,
 	CMD_SPELL_CAST_BEGIN, // add args here
 	CMD_SPELL_CAST_CORRECTLY,
+	CMD_TORCH_OFF_TEMP,
+	CMD_TORCH_OFF,
+	CMD_SPELL_CAST_END,
+	CMD_FOG_RUN,
+	CMD_ENABLE_BUTTONS,
+	CMD_RINGS_KILL,
+	CMD_RINGS_ENABLE,
 };
 enum TorchMessage {
 	TORCH_NOCMD,
 	TORCH_HIGH,
 	TORCH_LOW,
+	TORCH_OFF_TEMP,
+	TORCH_OFF,
 };
 class Message {
 private:
