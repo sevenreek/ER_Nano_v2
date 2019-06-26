@@ -16,7 +16,7 @@ void CommunicationController::pushCommsCleaner()
 }
 bool CommunicationController::hasMessage(Message*& message)
 {
-	if (pos > 0 && lastRecieved + MESSAGE_TIMEOUT < millis())
+	if (pos > 0 && ((lastRecieved + MESSAGE_TIMEOUT) < millis()))
 	{
 		//Serial.println("Timed out");
 		flushBuffer();
@@ -41,11 +41,6 @@ bool CommunicationController::hasMessage(Message*& message)
 		else if (pos >= TOTAL_LENGTH)
 		{
 			//Serial.println("Exceeds buffer");
-			flushBuffer();
-		}
-		else if (pos < 3 && !isAlphaNumeric(readChar))
-		{
-			//Serial.println("Nonnumeric before 3");
 			flushBuffer();
 		}
 		else
