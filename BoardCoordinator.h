@@ -9,6 +9,8 @@ private:
 	CommunicationController * mega;
 	WirelessController * wireless;
 	unsigned int currentInterfaceIndex;
+	unsigned int timedEventBegin;
+	bool reenableTorches = false;
 public:
 	BoardCoordinator(CommunicationController * pc, CommunicationController * mega, WirelessController * wireless);
 	void onUpdate();

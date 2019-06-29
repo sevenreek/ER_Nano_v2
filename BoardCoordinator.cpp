@@ -10,6 +10,11 @@ const unsigned int TORCH_OFF_TEMP_DELAY_TIME = 4000; // time after which to turn
 			// and equals the time it takes the transmitter to send the message the given amount of time.
 void BoardCoordinator::onUpdate()
 {
+	if (reenableTorches && millis() > timedEventBegin + TORCH_OFF_TEMP_DELAY_TIME)
+	{
+		wireless->sendShort(TORCH_LOW, WirelessController::REPEAT_COUNT);
+		reenableTorches = false;
+	}
 	Message * msg = 0;
 	if (pc->hasMessage(msg))
 	{
@@ -27,8 +32,7 @@ void BoardCoordinator::onUpdate()
 					break;
 				case CMD_TORCH_OFF_TEMP:
 					wireless->sendShort(TORCH_OFF_TEMP, WirelessController::REPEAT_COUNT);
-					delay(TORCH_OFF_TEMP_DELAY_TIME);
-					wireless->sendShort(TORCH_LOW, WirelessController::REPEAT_COUNT);
+					timedEventBegin = millis();
 					break;
 				case CMD_TORCH_OFF:
 					wireless->sendShort(TORCH_OFF, WirelessController::REPEAT_COUNT);
@@ -43,6 +47,7 @@ void BoardCoordinator::onUpdate()
 		}
 		delete msg;
 		msg = 0;
+		
 	}
 	if (mega->hasMessage(msg))
 	{

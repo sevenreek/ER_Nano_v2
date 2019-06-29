@@ -25,7 +25,7 @@ bool CommunicationController::hasMessage(Message*& message)
 	{
 		lastRecieved = millis();
 		char readChar = stream->read();
-		//Serial.print(readChar, HEX);
+		//Serial.println(readChar, HEX);
 		//Serial.print(' ');
 		if (readChar == '\n')
 		{
@@ -33,6 +33,10 @@ bool CommunicationController::hasMessage(Message*& message)
 			//Serial.print("Returning pointer: "); Serial.println((int)message);
 			flushBuffer();
 			return true;
+		}
+		else if (pos < 3 && readChar < 0x30)
+		{
+			flushBuffer();
 		}
 		else if (readChar == FLUSHING_CHARACTER)
 		{
@@ -58,8 +62,10 @@ void CommunicationController::sendMessage(Message* message)
 	{
 		Serial.print(arr[i]); Serial.print(' ');
 	}*/
+	//Serial.println("Sending");
 	for (int i = 0; i < TOTAL_LENGTH; i++)
 	{
+		//Serial.println(arr[i], HEX);
 		stream->write(arr[i]);
 	}
 
