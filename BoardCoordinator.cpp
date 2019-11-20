@@ -4,12 +4,16 @@ BoardCoordinator::BoardCoordinator(CommunicationController * pc, CommunicationCo
 	this->pc = pc;
 	this->mega = mega;
 	this->wireless = wireless;
+	pinMode(PIN_DRAWER_LOCK, OUTPUT);
+	digitalWrite(PIN_DRAWER_LOCK, HIGH);
+	
 }
 const unsigned int TORCH_OFF_TEMP_DELAY_TIME = 4000; // time after which to turn the torches back on after TEMP_OFF not exactly ms
 			// because the message is sent a lot of times to make sure it reaches the torches some minimal delay at the beginning exists
 			// and equals the time it takes the transmitter to send the message the given amount of time.
 void BoardCoordinator::onUpdate()
 {
+	
 	if (reenableTorches && millis() > timedEventBegin + TORCH_OFF_TEMP_DELAY_TIME)
 	{
 		wireless->sendShort(TORCH_LOW, WirelessController::REPEAT_COUNT);
@@ -22,6 +26,7 @@ void BoardCoordinator::onUpdate()
 		{
 			if (msg->type == MTYPE_EVENT)
 			{
+				Serial.println("Got event");
 				switch (msg->command)
 				{
 				case CMD_TORCH_GLOW:
@@ -36,6 +41,12 @@ void BoardCoordinator::onUpdate()
 					break;
 				case CMD_TORCH_OFF:
 					wireless->sendShort(TORCH_OFF, WirelessController::REPEAT_COUNT);
+					break;
+				case CMD_UNLOCK_DRAWER:
+					Serial.println("Unlock drawer");
+					digitalWrite(PIN_DRAWER_LOCK, LOW);
+					delay(50);
+					digitalWrite(PIN_DRAWER_LOCK, HIGH);
 					break;
 				default:
 					mega->sendMessage(msg);

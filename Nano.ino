@@ -43,6 +43,7 @@ void setup()
 	torches = new WirelessController(RF_SPEED, RF_RX, RF_TX, RF_PTT, RF_PTT_INV);
 	coordinator = new BoardCoordinator(pc, mega, torches);
 	mega->pushCommsCleaner();
+	Serial.println("Update");
 	//torches->sendShort(TORCH_HIGH, WirelessController::REPEAT_COUNT);
 }
 
